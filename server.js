@@ -78,3 +78,7 @@ app.post('/login', function(req, res){
         }
     });
 });
+
+app.get('/home', function(req, res) {
+   res.sendFile(__dirname + '/CERIGame/home.html');
+});

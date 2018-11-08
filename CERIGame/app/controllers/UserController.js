@@ -1,11 +1,12 @@
 
-CERIGameApp.controller('UserController',['$rootScope', '$scope','$location' , 'Authenticate', function($rootScope, $scope, $location, Authenticate) {
+CERIGameApp.controller('UserController',['$rootScope', '$scope', '$window', '$location' , 'Authenticate', function($rootScope, $scope, $window, $location, Authenticate) {
 
     $rootScope.titlePage = 'Login';
 
     $scope.login = function () {
         let auth = Authenticate.login($scope.username, $scope.password, function () {
-            $location.path('/home');
+            $window.location.href="/home";
+            //$window.location.reload();
         });
 
     };

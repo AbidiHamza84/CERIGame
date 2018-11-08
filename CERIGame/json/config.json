@@ -9,7 +9,7 @@
 
   "server_config" : {
     "server" : "localhost",
-    "port" : 3200
+    "port" : 3201
   },
 
   "base_url": "localhost",
