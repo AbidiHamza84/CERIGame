@@ -78,7 +78,3 @@ app.post('/login', function(req, res){
         }
     });
 });
-
-app.get('/home', function(req, res) {
-   res.send("sss");
-});
