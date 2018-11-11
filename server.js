@@ -1,6 +1,6 @@
 /******** Chargement des Middleware
-*
-********/
+ *
+ ********/
 const express = require('express');
 const config = require("./CERIGame/json/config");
 const bodyParser = require("body-parser");
@@ -12,14 +12,14 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 
 
 /******** Declaration des variables
-*
-********/
+ *
+ ********/
 
 const app = express();
 
 /******** Configuration du serveur NodeJS - Port : 3200
-*
-********/
+ *
+ ********/
 
 app.use(express.static(__dirname + '/CERIGame'));
 app.use(express.static(__dirname + '/CERIGame/app/views'));
@@ -40,12 +40,12 @@ app.use(session({
 }));
 
 app.listen(config.server_config.port, function(){
-	console.log('listening port ' + config.server_config.port);
+    console.log('listening port ' + config.server_config.port);
 });
 
 /******** Gestion des URI
-*
-********/
+ *
+ ********/
 
 
 /******** Connexion à la base relationnelle
@@ -80,5 +80,121 @@ app.post('/login', function(req, res){
 });
 
 app.get('/home', function(req, res) {
-   res.sendFile(__dirname + '/CERIGame/home.html');
+    res.sendFile(__dirname + '/CERIGame/home.html');
+});
+
+app.get('/getHistory/:id',function (req,res) {
+    let sqlManager = new SQLManager();
+    let sql = "select * from fredouil.historique where id_users = $1";
+    sqlManager.execute(sql, [req.params.id], function (result,responseData) {
+
+        res.send(result.rows);
+    });
+});
+
+app.get('/getHistories/',function (req,res) {
+    let sqlManager = new SQLManager();
+    let sql = "select * from fredouil.historique";
+    sqlManager.execute(sql,null,function (result,responseData) {
+        res.send(result.rows);
+    });
+});
+app.get('/getUsers',function (req,res) {
+    let sqlManager = new SQLManager();
+    let sql = "select * from fredouil.users";
+    sqlManager.execute(sql,null,function (result,responseData) {
+        res.send(result.rows);
+    });
+});
+app.get('/getUser/:id',function (req,res) {
+    let sqlManager = new SQLManager();
+    let sql = "select * from fredouil.users where id = $1";
+    sqlManager.execute(sql, [req.params.id], function (result,responseData) {
+        res.send(result.rows);
+    });
+});
+app.put('/updateUser/:id',function (req,res) {
+    if(req.params.id == null)
+    {
+        res.status(500).send('No Id !');
+    }else
+    {
+        let sqlManager = new SQLManager();
+        if(req.body.identifiant != null)
+        {
+            let sql = "UPDATE fredouil.users SET identifiant = $1 where id = $2";
+            sqlManager.execute(sql, [req.body.identifiant, req.params.id], function (result,responseData) {
+            });
+        }
+        if(req.body.motpasse != null)
+        {
+            let password_sha1 = sha1(req.body.password);
+            let sql = "UPDATE fredouil.users SET motpass = $1 where id = $2";
+            sqlManager.execute(sql,[password_sha1, req.params.id],function (result,responseData) {
+            });
+        }
+        if(req.body.nom != null)
+        {
+            let sql = "UPDATE fredouil.users SET nom = $1 where id = $2";
+            sqlManager.execute(sql,[req.body.nom, req.params.id],function (result,responseData) {
+            });
+        }
+        if(req.body.prenom != null)
+        {
+            let sql = "UPDATE fredouil.users SET prenom = $1 where id = $2";
+            sqlManager.execute(sql,[req.body.prenom, req.params.id],function (result,responseData) {
+            });
+        }
+        if(req.body.statut != null)
+        {
+            let sql = "UPDATE fredouil.users SET statut = $1 where id = $2";
+            sqlManager.execute(sql,[req.body.statut, req.params.id],function (result,responseData) {
+            });
+        }
+        if(req.body.avatar != null)
+        {
+            let sql = "UPDATE fredouil.users SET avatar = $1 where id = $2";
+            sqlManager.execute(sql,[req.body.avatar, req.params.id],function (result,responseData) {
+            });
+        }
+        res.status(200).send("ok");
+    }
+});
+
+app.post('/setHistory/:id',function (req,res) {
+    if(req.params.id == null)
+    {
+        res.status(500).send('No Id !');
+    }else
+    {
+        let sqlManager = new SQLManager();
+
+        if( (req.params.id != null) && (req.body.date != null) && (req.body.nbreponse != null) && (req.body.temps != null) && (req.body.score != null)  )
+        {
+            let sql = "INSERT INTO fredouil.historique VALUES (default,$1,now(), $2, $3, $4)";
+
+            sqlManager.execute(sql, [req.params.id, req.body.nbreponse, req.body.temps, req.body.score], function (result,responseData) {
+            });
+            res.send("ok");
+        }
+
+
+    }
+});
+
+app.get('/getQizz',function (req,res) {
+    let themes = {
+        "1":"Héros Marvel",
+        "2":"Musée du Louvre",
+        "3":"Star Wars",
+        "4":"Animaux célèbres",
+        "5":"Tintin",
+        "6":"Russia 2018 (Coupe du monde de football 2018)",
+        "7":"Culture générale 4 (La culture, c'est l'expression du vivant)",
+        "8":"Trouvez le nombre", "9":"Culture générale",
+        "10":"Actu people : août 2018 (Ils ont fait l'actualité)",
+        "11":"Linux"
+    };
+
+
 });
