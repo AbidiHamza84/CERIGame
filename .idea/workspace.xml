@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="809d34af-8e01-401b-a368-0513351a0c38" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CERIGame/css/dashboard.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CERIGame/app/._app.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CERIGame/app/views/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/CERIGame/app/views/dashboard.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CERIGame/css/style-home.css" beforeDir="false" afterPath="$PROJECT_DIR$/CERIGame/css/style-home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CERIGame/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/CERIGame/home.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -124,7 +119,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="css" value="259" />
+          <entry key="css" value="262" />
           <entry key="dummy" value="6" />
           <entry key="html" value="1740" />
           <entry key="js" value="4296" />
@@ -133,7 +128,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CSS" value="259" />
+          <entry key="CSS" value="262" />
           <entry key="HTML" value="1740" />
           <entry key="JSON" value="322" />
           <entry key="JavaScript" value="4296" />
@@ -197,7 +192,7 @@
         <entry file="file://$PROJECT_DIR$/CERIGame/css/style-home.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
-              <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+              <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -482,12 +477,12 @@
       <workItem from="1541154688416" duration="7743000" />
       <workItem from="1541496617093" duration="4096000" />
       <workItem from="1541667647340" duration="21009000" />
-      <workItem from="1541934419951" duration="7335000" />
+      <workItem from="1541934419951" duration="7515000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102405000" />
+    <option name="totallyTimeSpent" value="102585000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -505,7 +500,7 @@
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="npm" order="1" sideWeight="0.502447" side_tool="true" weight="0.21149242" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="3" sideWeight="0.49755302" visible="true" weight="0.17877094" />
+      <window_info content_ui="combo" id="Project" order="3" sideWeight="0.49755302" visible="true" weight="0.17877094" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.5083799" side_tool="true" weight="0.5106036" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -516,7 +511,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.31524342" side_tool="true" weight="0.3360522" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49162012" visible="true" weight="0.3213703" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49162012" visible="true" weight="0.3213703" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -719,7 +714,7 @@
     <entry file="file://$PROJECT_DIR$/CERIGame/css/style-home.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
-          <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
         </state>
       </provider>
     </entry>
