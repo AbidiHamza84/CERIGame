@@ -1,0 +1,88 @@
+.card-counter{
+    box-shadow: 2px 2px 10px #DADADA;
+    margin: 5px 5px 25px 5px;
+    padding: 20px 10px;
+    background-color: #fff;
+    height: 120px;
+    border-radius: 5px;
+    transition: .3s linear all;
+    cursor: pointer;
+}
+
+.card-counter:hover{
+    box-shadow: 4px 4px 20px #DADADA;
+    transition: .3s linear all;
+}
+
+.card-counter.dashboard{
+    background-color: #607D8B;
+    color: #FFF;
+}
+
+.card-counter.new-party{
+    background-color: #009688;
+    color: #FFF;
+}
+
+.card-counter.profile{
+    background-color: #7C4DFF;
+    color: #FFF;
+}
+
+.card-counter.history{
+    background-color: #26c6da;
+    color: #FFF;
+}
+
+.card-counter.users{
+    background-color: #66bb6a;
+    color: #FFF;
+}
+
+.card-counter.statistics{
+    background-color: #2196F3;
+    color: #FFF;
+}
+
+.card-counter.about{
+    background-color: #00bcd4;
+    color: #FFF;
+}
+
+.card-counter.logout{
+    background-color: #f44336;
+    color: #FFF;
+}
+
+.card-counter svg{
+    font-size: 5.5em;
+    opacity: 0.2;
+}
+
+.card-counter .count-numbers{
+    position: absolute;
+    right: 35px;
+    top: 20px;
+    font-size: 32px;
+    display: block;
+}
+
+.card-counter .count-name-number{
+    position: absolute;
+    right: 35px;
+    top: 65px;
+    font-style: italic;
+    opacity: 0.5;
+    display: block;
+    font-size: 18px;
+}
+
+.card-counter .count-name{
+    position: absolute;
+    right: 35px;
+    top: 50px;
+    font-style: italic;
+    opacity: 0.5;
+    display: block;
+    font-size: 18px;
+}

@@ -125,23 +125,35 @@ ul.CTAs {
     padding: 20px;
 }
 
+
+
 ul.CTAs a {
     text-align: center;
     font-size: 0.9em !important;
     display: block;
     border-radius: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 25px;
 }
 
-a.download {
+a.menu-button {
     background: #fff;
     color: #7386D5;
+}
+
+ul.disconnect{
+    padding-top: 5px;
 }
 
 a.article,
 a.article:hover {
     background: #6d7fcc !important;
     color: #fff !important;
+}
+
+.force-to-bottom {
+    position:absolute;
+    bottom: 2%;
+    width: 100%;
 }
 
 /* ---------------------------------------------------
