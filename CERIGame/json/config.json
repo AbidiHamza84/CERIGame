@@ -9,7 +9,7 @@
 
   "server_config" : {
     "server" : "localhost",
-    "port" : 3201
+    "port" : 3200
   },
 
   "base_url": "localhost",
@@ -24,8 +24,19 @@
 
   "mongo_config" : {
     "store": {
-      "uri": "mongodb://127.0.0.1:27017/db",
-      "collection": "mySessions3200"
+      "url": "mongodb://127.0.0.1",
+      "port" : 27017,
+      "dataBase" : "db",
+      "collections": {
+        "session": "mySessions3200",
+        "quizz" : "quizz"
+      }
     }
+  },
+
+  "session" : {
+    "id" : -1,
+    "firstName" : "",
+    "lastName" : ""
   }
 }
