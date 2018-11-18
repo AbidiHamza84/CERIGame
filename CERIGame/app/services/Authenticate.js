@@ -2,7 +2,6 @@ CERIGameApp.service('Authenticate', ['$http', function ($http) {
 
     this.login = function (username, password, callback = undefined) {
 
-
         $http.post("/login", { username: username, password: password }).then(function(response){
             if (response.data.error.state === false) {
                 localStorage.setItem('lastConnexion', new Date().toLocaleString());

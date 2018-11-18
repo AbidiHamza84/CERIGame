@@ -1,3 +1,3 @@
-CERIGameApp.controller('AboutController',['$rootScope', '$scope', function($rootScope, $scope) {
-    $rootScope.pageTitle = "About";
+CERIGameApp.controller('AboutController',['$rootScope', '$scope', 'Session', function($rootScope, $scope, Session) {
+
 }]);

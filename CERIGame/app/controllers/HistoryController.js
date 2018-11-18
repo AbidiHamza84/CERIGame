@@ -1,17 +1,12 @@
-CERIGameApp.controller('HistoryController',['$scope', '$http', function($scope,$http) {
-    $scope.history = function() {
-        $http.get("/getHistoryByUser/1").then(function (histories) {
+CERIGameApp.controller('HistoryController',['$scope', '$http', 'Session', function($scope, $http, Session) {
 
-            let content = "";
-
+    Session.get(function (session) {
+        $http.get("/getHistoryByUser/" + session.id).then(function (histories) {
             for (let i = 0; i < histories.data.length; i++){
                 let history = histories.data[i];
-                content += history.date + ", " + history.nbreponse + ", " + history.temps + ", " + history.score + "</br>";
+                history.date = history.date.replace('Z','');
             }
-
-            $scope.content = content;
-            console.log($scope.content);
+            $scope.histories = histories.data;
         });
-    }
-    $scope.content = "kjsdhf";
+    });
 }]);

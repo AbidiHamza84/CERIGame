@@ -35,9 +35,8 @@ app.use(session({
         uri: config.mongo_config.store.url + ':' + config.mongo_config.store.port + '/' +
             config.mongo_config.store.dataBase,
         collection: config.mongo_config.store.collections.session ,
-        touchAfter: 24 * 3600
     }),
-    cookie : {maxAge : 24 * 3600 * 1000}
+    cookie : {maxAge : 3600 * 60 * 10} // ~ 30min
 }));
 
 app.listen(config.server_config.port, function(){
@@ -228,23 +227,12 @@ app.get('/getSession', function(req, res){
     });
 });
 
-app.delete('/deleteSession', function(req, res){
+app.post('/deleteSession', function(req, res){
     req.session.destroy();
+    res.redirect('/');
 });
 
 app.get('/getQuizz',function (req,res) {
-    // let themes = {
-    //     "1":"Héros Marvel",
-    //     "2":"Musée du Louvre",
-    //     "3":"Star Wars",
-    //     "4":"Animaux célèbres",
-    //     "5":"Tintin",
-    //     "6":"Russia 2018 (Coupe du monde de football 2018)",
-    //     "7":"Culture générale 4 (La culture, c'est l'expression du vivant)",
-    //     "8":"Trouvez le nombre", "9":"Culture générale",
-    //     "10":"Actu people : août 2018 (Ils ont fait l'actualité)",
-    //     "11":"Linux"
-    // };
 
     let url = config.mongo_config.store.url + ':' + config.mongo_config.store.port + '/' ;
 

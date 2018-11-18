@@ -1,9 +1,6 @@
-CERIGameApp.controller('LogoutController',['$scope', '$http', function($scope, $http) {
+CERIGameApp.controller('LogoutController',['$scope', 'Session', function($scope, Session) {
 
     $scope.logout = function() {
-        console.log("logout !");
-        $http.delete("/deleteSession").then(function () {
-            console.log("done !");
-        });
+        Session.delete();
     }
 }]);

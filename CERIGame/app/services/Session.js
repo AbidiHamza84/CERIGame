@@ -1,15 +1,18 @@
+CERIGameApp.service('Session', ['$http', '$window', function ($http, $window) {
 
-CERIGameApp.service('Session', ['$http', function ($http) {
-    const config = require("./../../json/config");
-    this.get = function () {
-        $http.get("/session").then(function(response){
-            console.log('get session = ' + response);
+    this.get = function (callback = undefined) {
+        $http.get("/getSession").then(function(session){
+            console.log('get session = ' + session);
+            if(session !== undefined && callback !== undefined){
+                callback(session.data[0].session);
+            }
         });
     };
 
-    this.set = function (session = config.session) {
-        $http.post("/session", { session: session }).then(function(response){
-            console.log('session after posting (' + session + ') = ' + response);
+    this.delete = function () {
+        $http.post("/deleteSession").then(function () {
+            $window.location.href = "/";
         });
-    }
+    };
 }]);
+

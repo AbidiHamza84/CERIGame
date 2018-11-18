@@ -1,3 +1,21 @@
-<div ng-controller="HistoryController">
-   <div >{{content}}</div>
-</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre de réponses</th>
+            <th>Score</th>
+            <th>Temps</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr ng-repeat="history in histories">
+            <td>{{ history.nbreponse }}</td>
+            <td>{{ history.score }}</td>
+            <td>{{ history.temps }}</td>
+            <td>{{ history.date  | date:"dd/MM/yyyy 'à' HH:mm"}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<div ng-bind="content"></div>
