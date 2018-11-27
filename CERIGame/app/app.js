@@ -1,4 +1,4 @@
-let CERIGameApp = angular.module('CERIGameApp', ["ngRoute"]);
+let CERIGameApp = angular.module('CERIGameApp', ["ngRoute",'ngMaterial']);
 
 CERIGameApp
     .run(['$rootScope', '$route', '$window', 'Session', function ($rootScope, $route, $window, Session) {
@@ -6,7 +6,6 @@ CERIGameApp
 
             Session.get(function(session){
                 if(session !== undefined){
-                    console.log(session);
                     //Change page title, based on Route information
                     $rootScope.title = $route.current.title;
                 }

@@ -10,6 +10,7 @@ const
     MongoDBStore = require('connect-mongodb-session')(session),
     MongoClient = require('mongodb').MongoClient,
     SQLManager = require('./CERIGame/app/utils/SQLManager');
+    let ObjectId = require('mongodb').ObjectID;
 
 /******** Declaration des variables
  *
@@ -127,58 +128,63 @@ app.get('/getUsers',function (req,res) {
     let sqlManager = new SQLManager();
     let sql = "select * from fredouil.users";
     sqlManager.execute(sql,null,function (result,responseData) {
-        res.send(result.rows);
+        res.status(200).send(result.rows);
     });
 });
 app.get('/getUser/:id',function (req,res) {
     let sqlManager = new SQLManager();
     let sql = "select * from fredouil.users where id = $1";
     sqlManager.execute(sql, [req.params.id], function (result,responseData) {
-        res.send(result.rows);
+        res.status(200).send(result.rows);
     });
 });
-app.put('/updateUser/:id',function (req,res) {
-    if(req.params.id == null)
+app.put('/updateUser',function (req,res) {
+    let id = req.body.id;
+
+    console.log("la79et la requete  = " + req.body);
+    if(req.body.id == null)
     {
         res.status(500).send('No Id !');
     }else
     {
+        console.log("la79et la requete  = " + req.body);
         let sqlManager = new SQLManager();
         if(req.body.identifiant != null)
         {
-            let sql = "UPDATE fredouil.users SET identifiant = $1 where id = $2";
-            sqlManager.execute(sql, [req.body.identifiant, req.params.id], function (result,responseData) {
+            let sql = "UPDATE fredouil.users SET identifiant = '" + req.body.identifiant + "' where id = " + req.body.id;
+            sqlManager.execute(sql, null, function (result,responseData) {
             });
         }
         if(req.body.motpasse != null)
         {
             let password_sha1 = sha1(req.body.password);
-            let sql = "UPDATE fredouil.users SET motpass = $1 where id = $2";
-            sqlManager.execute(sql,[password_sha1, req.params.id],function (result,responseData) {
+            let sql = "UPDATE fredouil.users SET motpass = '" + req.body.password + "' where id = " + req.body.id;
+            sqlManager.execute(sql,null,function (result,responseData) {
             });
         }
         if(req.body.nom != null)
         {
-            let sql = "UPDATE fredouil.users SET nom = $1 where id = $2";
-            sqlManager.execute(sql,[req.body.nom, req.params.id],function (result,responseData) {
+            console.log("la79et la requete  = " + req.body.nom);
+            let sql = "UPDATE fredouil.users SET nom = '" + req.body.nom + "' where id = " + req.body.id;
+            sqlManager.execute(sql,null, function (result,responseData) {
             });
         }
         if(req.body.prenom != null)
         {
-            let sql = "UPDATE fredouil.users SET prenom = $1 where id = $2";
-            sqlManager.execute(sql,[req.body.prenom, req.params.id],function (result,responseData) {
+            let sql = "UPDATE fredouil.users SET prenom = '" + req.body.prenom + "' where id = " + req.body.id;
+            sqlManager.execute(sql,null,function (result,responseData) {
             });
         }
         if(req.body.statut != null)
         {
-            let sql = "UPDATE fredouil.users SET statut = $1 where id = $2";
-            sqlManager.execute(sql,[req.body.statut, req.params.id],function (result,responseData) {
+            let sql = "UPDATE fredouil.users SET statut = '" + req.body.statut + "' where id = " + req.body.id;
+            sqlManager.execute(sql,null,function (result,responseData) {
             });
         }
-        if(req.body.avatar != null)
+        if(req.body.avatar !== null)
         {
-            let sql = "UPDATE fredouil.users SET avatar = $1 where id = $2";
-            sqlManager.execute(sql,[req.body.avatar, req.params.id],function (result,responseData) {
+            let sql = "UPDATE fredouil.users SET avatar = '" + req.body.avatar + "' where id = " + req.body.id;
+            sqlManager.execute(sql,null,function (result,responseData) {
             });
         }
         res.status(200).send("ok");
@@ -252,6 +258,28 @@ app.get('/getQuizz',function (req,res) {
 
 });
 
+app.post('/getQuizzByTheme',function (req,res) {
+
+    let id = req.body.idTheme;
+    console.log(id);
+    let url = config.mongo_config.store.url + ':' + config.mongo_config.store.port + '/' ;
+
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        let dbo = db.db(config.mongo_config.store.dataBase);
+        dbo.collection(config.mongo_config.store.collections.quizz).find({_id : new ObjectId(id)},{projection : {"quizz" : 1, "_id":0}}).toArray(function(err, result) {
+            if (err){
+                res.status(404);
+                throw err;
+            }
+            res.status(200).send(result);
+            db.close();
+        });
+    });
+
+
+});
+
 
 
 app.get('/getThemes',function (req, res){
@@ -260,7 +288,7 @@ app.get('/getThemes',function (req, res){
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         let dbo = db.db(config.mongo_config.store.dataBase);
-        dbo.collection(config.mongo_config.store.collections.quizz).distinct("thème", {}, function(err, result) {
+        dbo.collection(config.mongo_config.store.collections.quizz).find({},{ projection: {_id : 1, thème : 1}}).toArray(function(err, result) {
             if (err){
                 res.status(404);
                 throw err;
