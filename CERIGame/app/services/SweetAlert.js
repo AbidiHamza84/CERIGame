@@ -1,7 +1,4 @@
-angular
-    .module('sweetalert', [])
-    .factory('swal', SweetAlert);
+angular.factory('swal', function SweetAlert() {
+        return window.swal;
+    });
 
-function SweetAlert() {
-    return window.swal;
-};
