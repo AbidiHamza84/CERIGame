@@ -1,7 +1,8 @@
 
-CERIGameApp.controller('UserController',['$rootScope', '$scope', '$window', '$location' , 'Authenticate', function($rootScope, $scope, $window, $location, Authenticate) {
+CERIGameApp.controller('UserController',['$scope', '$window', 'Authenticate', 'Session', function($scope, $window, Authenticate, Session) {
     $scope.login = function () {
         let auth = Authenticate.login($scope.username, $scope.password, function () {
+            Session.store();
             $window.location.href="/home";
         });
 

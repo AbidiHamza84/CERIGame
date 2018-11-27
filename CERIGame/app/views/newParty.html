@@ -1,18 +1,92 @@
-<div class="sample tabsdemoDynamicTabs" layout="column" ng-cloak="">
-    <md-content class="md-padding">
-        <md-tabs md-selected="selectedIndex" md-border-bottom="" md-autoselect="" md-swipe-content="">
-            <md-tab ng-repeat="tab in tabs" ng-disabled="tab.disabled" label="{{tab.title}}">
-                <div class="demo-tab tab{{$index%4}}" style="padding: 25px; text-align: center;">
-                    <div ng-bind="tab.content"></div>
-                    <br>
-                    <md-button class="md-primary md-raised" ng-click="removeTab( tab )" ng-disabled="tabs.length <= 1">Remove Tab</md-button>
-                </div>
-            </md-tab>
-        </md-tabs>
-    </md-content>
+
+<div ng-show="currentStep == 1">
+    <p>Choisissez un niveau de difficulté</p>
+    <div class="d-flex justify-content-center">
+        <div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" ng-model="levelParty" value="1" ng-checked="true">Facile
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" ng-model="levelParty" value="2">Moyen
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" ng-model="levelParty" value="3">Difficile
+                </label>
+            </div>
+            <br>
+            <br>
+            <button type="button" ng-click="nextStep();getThemes()" class="btn btn-info">Suivant</button>
+        </div>
+    </div>
 </div>
 
-<!--
-Copyright 2018 Google Inc. All Rights Reserved. 
-Use of this source code is governed by an MIT-style license that can be foundin the LICENSE file at http://material.angularjs.org/HEAD/license.
--->
+<div ng-show="currentStep == 2">
+    <p>Maintenent, dites nous ! quel thème vous préferez ?</p>
+    <div class="d-flex justify-content-center">
+        <div>
+            <div class="form-check" ng-repeat="theme in themes">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="themeParty" ng-model="themeParty" value="{{theme.id}}" ng-checked="false">{{theme.name}}>
+                </label>
+            </div>
+            <br>
+            <br>
+            <button type="button" ng-click="previousStep()" class="btn btn-warning">Précedent</button>
+            <button type="button" ng-click="nextStep()" class="btn btn-info">Suivant</button>
+        </div>
+    </div>
+
+</div>
+
+<div ng-show="currentStep == 3">
+    <p>On a presque fini, choisissez vous une durée pour chaque question !</p>
+    <div class="d-flex justify-content-center">
+        <div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" ng-model="durationQuestion" name="durationQuestion" value="1" ng-checked="true">1 minute
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" ng-model="durationQuestion" name="durationQuestion" value="2">2 minutes
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" ng-model="durationQuestion" name="durationQuestion" value="3">3 minutes
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" ng-model="durationQuestion" name="durationQuestion" value="4">4 minutes
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" ng-model="durationQuestion" name="durationQuestion" value="5">5 minutes
+                </label>
+            </div>
+            <br>
+            <br>
+            <button type="button" ng-click="nextStep();getThemes()" class="btn btn-info">Suivant</button>
+        </div>
+    </div>
+</div>
+
+<div ng-show="currentStep == 4">
+    <p>C'est parti, à vous</p>
+    <div class="d-flex justify-content-center">
+        <div>
+            quizz
+
+            <br>
+            <br>
+        </div>
+    </div>
+</div>

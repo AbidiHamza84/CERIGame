@@ -1,4 +1,4 @@
-let CERIGameApp = angular.module('CERIGameApp', ["ngRoute",'ngMaterial']);
+let CERIGameApp = angular.module('CERIGameApp', ['ngRoute','sweetalert']);
 
 CERIGameApp
     .run(['$rootScope', '$route', '$window', 'Session', function ($rootScope, $route, $window, Session) {

@@ -288,7 +288,7 @@ app.get('/getThemes',function (req, res){
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         let dbo = db.db(config.mongo_config.store.dataBase);
-        dbo.collection(config.mongo_config.store.collections.quizz).find({},{ projection: {_id : 1, thème : 1}}).toArray(function(err, result) {
+        dbo.collection(config.mongo_config.store.collections.quizz).aggregate([{ $project: {id: '$_id' , _id : 0, name: '$thème'} }]).toArray(function(err, result) {
             if (err){
                 res.status(404);
                 throw err;

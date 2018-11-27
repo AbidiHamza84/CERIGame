@@ -1,3 +1,3 @@
-CERIGameApp.controller('DashBoardController',['$rootScope', '$scope','$http', function($rootScope) {
+CERIGameApp.controller('DashBoardController',['$rootScope', function($rootScope) {
     $rootScope.lastConnexion = "Dernière connexion : " + localStorage.getItem('lastConnexion');
 }]);
