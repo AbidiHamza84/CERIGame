@@ -1,0 +1,33 @@
+.card-proposition{
+    box-shadow: 2px 2px 10px #DADADA;
+    background-color: #fff;
+    max-width: 20rem;
+    border-radius: 5px;
+    transition: .3s linear all;
+    cursor: pointer;
+}
+
+.card-proposition{
+    top: 20px;
+    display: block;
+    margin-left: 7%;
+    margin-bottom: 40px;
+}
+
+.card-proposition:hover{
+    box-shadow: 4px 4px 50px #DADADA;
+    transition: .3s linear all;
+}
+
+.card-proposition.true{
+    border-color: #aed581;
+    box-shadow: 4px 4px 50px #8bc34a;
+    transition: .3s linear all;
+}
+
+.card-proposition.false{
+    border-color: #e57373;
+    box-shadow: 4px 4px 50px #f44336;
+    transition: .3s linear all;
+}
+

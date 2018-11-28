@@ -267,12 +267,21 @@ app.post('/getQuizzByTheme',function (req,res) {
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         let dbo = db.db(config.mongo_config.store.dataBase);
-        dbo.collection(config.mongo_config.store.collections.quizz).find({_id : new ObjectId(id)},{projection : {"quizz" : 1, "_id":0}}).toArray(function(err, result) {
+        dbo.collection(config.mongo_config.store.collections.quizz).aggregate([ { $match : { _id : new ObjectId(id)} }, { $project: { _id : 0, quizz : { id : 1, question : 1, propositions : 1, anecdote : 1, reponses : '$quizz.réponse' } } } ]).toArray(function(err, result) {
             if (err){
                 res.status(404);
                 throw err;
             }
-            res.status(200).send(result);
+            let resultat = [];
+            let i = 0;
+            result[0].quizz.forEach(function(quizz) {
+                resultat[i] = quizz;
+                resultat[i].reponse = quizz.reponses[i];
+                delete resultat[i].reponses;
+
+                i++;
+            });
+            res.status(200).send(resultat);
             db.close();
         });
     });

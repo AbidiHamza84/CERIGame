@@ -1,4 +1,4 @@
-
+<link rel="stylesheet" href="../../css/newParty.css">
 <div ng-show="currentStep == 1">
     <p>Choisissez un niveau de difficulté</p>
     <div class="d-flex justify-content-center">
@@ -30,8 +30,8 @@
     <div class="d-flex justify-content-center">
         <div>
             <div class="form-check" ng-repeat="theme in themes">
-                <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="themeParty" ng-model="themeParty" value="{{theme.id}}" ng-checked="false">{{theme.name}}>
+                <label class="form-check-label" >
+                    <input type="radio" class="form-check-input" ng-model="themeParty" name="themeParty" value="{{theme.id}}" ng-change="handleRadioClick(theme.id)">{{theme.name}}
                 </label>
             </div>
             <br>
@@ -74,7 +74,8 @@
             </div>
             <br>
             <br>
-            <button type="button" ng-click="nextStep();getQuizz()" class="btn btn-info">Suivant</button>
+            <button type="button" ng-click="previousStep()" class="btn btn-warning">Précedent</button>
+            <button type="button" ng-click="nextStep()" class="btn btn-info">Suivant</button>
         </div>
     </div>
 </div>
@@ -83,10 +84,46 @@
     <p>C'est parti, à vous</p>
     <div class="d-flex justify-content-center">
         <div>
-            quizz
-
+            <button type="button" ng-click="nextStep();getQuizz()" class="btn btn-info btn-lg">Commancer</button>
             <br>
             <br>
+            <button type="button" ng-click="previousStep()" class="btn btn-warning btn-lg">Précedent</button>
+            <br>
+            <br>
+            <button type="button" ng-click="abandon()" class="btn btn-danger btn-lg">Abandonner</button>
         </div>
     </div>
 </div>
+
+<div ng-show="currentStep == 5">
+    <p>{{quizz.question}}</p>
+    <div class="d-flex justify-content-center">
+        <div class="container">
+            <div class="row">
+                <!-- propositions -->
+                <div class="card card-proposition col-md-6" ng-repeat="proposition in quizz.propositions" ng-click="chooseQuizz($event, $index)">
+
+                    <div class="card-body">
+                        <h4 class="card-title">Proposition n° {{$index + 1}}</h4>
+                        <p class="card-text">{{proposition}}</p>
+                        <!-- Links -->
+                        <a href="#" class="card-link">Sun Gone</a>
+                        <a href="#" class="card-link">Still Gone</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="d-flex justify-content-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <button style="margin-left: 100px;" type="button" ng-show="showNextQuizz" ng-click="nextQuizz()" class="btn btn-info  btn-lg btn-block">Quizz suivant</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
