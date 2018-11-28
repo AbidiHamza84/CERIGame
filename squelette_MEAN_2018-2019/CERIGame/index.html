@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="CERIGameApp" lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title ng-bind="$root.title"></title>
+
+    <base href="/">
+
+    <link rel="stylesheet" href="css/login.css">
+
+    <!-- css libs -->
+        <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
+
+    <!-- js libs -->
+           <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <!-- AngularJs -->
+    <script src="lib/angular.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular-route.js"></script>
+
+    <!-- global app variables & routes-->
+    <script src="app/app.js" type="text/javascript"></script>
+
+    <!-- directives -->
+
+    <!-- services -->
+    <script src="app/services/Authenticate.js" type="text/javascript"></script>
+    <script src="app/services/Session.js" type="text/javascript"></script>
+
+    <!-- controllers -->
+    <script src="app/controllers/UserController.js" type="text/javascript"></script>
+
+</head>
+
+<body >
+<div>
+
+
+    <div class="center-in-page " ng-controller="UserController">
+        <div class="card card-container">
+
+            <img id="profile-img" class="profile-img-card" src="../../images/app-logo" />
+            <p id="profile-name" class="profile-name-card"></p>
+            <form class="form-signin" novalidate ng-submit="login()">
+                <span id="reauth-email" class="reauth-email"></span>
+                <input type="text" id="inputEmail" ng-model="username" class="form-control" placeholder="Email address" required autofocus>
+                <input type="password" id="inputPassword" ng-model="password" class="form-control" placeholder="Password" required>
+                <div id="remember" class="checkbox">
+                    <label>
+                        <input type="checkbox" value="remember-me" ng-model="rememberMe"> Remember me
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+            </form><!-- /form -->
+            <a href="#" class="forgot-password">
+                Forgot the password?
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
