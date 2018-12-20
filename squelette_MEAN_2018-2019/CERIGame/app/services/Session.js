@@ -1,31 +1,43 @@
-CERIGameApp.service('Session', ['$http', '$window', function ($http, $window) {
+CERIGameApp.service('Session', ['$http', '$window', '$q', function ($http, $window, $q) {
     let name = "session";
     let $this = this;
+    this.error = "error session";
+    let result = undefined;
+    let deferred = $q.defer();
     /*
     get the current session from mongodb
      */
-    this.get = function (callback = undefined) {
+    this.get = function () {
         $http.get("/getSession").then(function(session){
             if(session !== undefined && session.data !== undefined && session.data[0] !== undefined) {
-                if(callback !== undefined)
-                    callback(session.data[0].session.user);
+                sessionStorage.setItem(name, JSON.stringify(session.data[0].session));
+                result = session.data[0];
+                deferred.resolve(result);
             }
-            else {
+            else{
+                console.log(JSON.stringify(session));
+                console.log("session expired !");
+                deferred.reject("session expired !");
                 $this.remove();
-                if(callback !== undefined)
-                    callback(undefined);
             }
+
+        }, function (error) {
+            $this.remove();
+            this.error = error;
+            result = JSON.parse(error);
+            deferred.reject(result);
         });
+
+        result = deferred.promise;
+        return $q.when(result);
     };
 
     /*
     store session in the sessionStorage
      */
     this.store = function () {
-        $this.get(function (session) {
-            if(session !== undefined){
-                sessionStorage.setItem(name, JSON.stringify(session));
-            }
+        $this.get().then(function (session) {
+            sessionStorage.setItem(name, JSON.stringify(session.session));
         });
     };
 
@@ -41,11 +53,18 @@ CERIGameApp.service('Session', ['$http', '$window', function ($http, $window) {
      */
     this.getSession = function () {
         let session = sessionStorage.getItem(name);
-        if(session !== undefined)
-            return JSON.parse(session);
+        if(session !== undefined) {
+            console.log(session);
+            return JSON.parse(session).user;
+        }
 
-        return undefined;
+        this.error = "you are disconnected !";
+        return this.error;
     };
+
+    this.getError = function () {
+        return this.error;
+    }
 
     /*
     delete session from mongodb

@@ -10,17 +10,17 @@
         <div>
             <div class="form-check">
                 <label class="form-check-label">
-                    <input type="radio" class="form-check-input" ng-model="durationQuestion" name="durationQuestion" value="3" ng-checked="true">Facile
+                    <input type="radio" class="form-check-input" ng-model="level" name="level" value="2" ng-checked="true">Facile
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label">
-                    <input type="radio" class="form-check-input" ng-model="durationQuestion" name="durationQuestion" value="2">Moyen
+                    <input type="radio" class="form-check-input" ng-model="level" name="level" value="3">Moyen
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label">
-                    <input type="radio" class="form-check-input" ng-model="durationQuestion" name="durationQuestion" value="1">Difficile
+                    <input type="radio" class="form-check-input" ng-model="level" name="level" value="4">Difficile
                 </label>
             </div>
             <br>
@@ -68,11 +68,15 @@
     <div class="d-flex justify-content-center">
         <div class="container">
             <div class="row">
+                <div class="isGoodResponse" ng-model="wellResponse">{{wellResponse}}</div>
+                <div class="isWrongResponse" ng-model="wrongResponse">{{wrongResponse}}</div>
+            </div>
+            <div class="row">
                 <!-- propositions -->
                 <div  class="card card-proposition col-md-6" ng-repeat="proposition in quizz.propositions" ng-click="chooseResponse($event, $index)" id="prop_{{$index}}">
                     <div class="card-body">
                         <h4 class="card-title">Proposition n° {{$index + 1}}</h4>
-                        <p class="card-text">{{proposition}}</p>
+                        <p class="proposition card-text">{{proposition}}</p>
                         <div ng-show="goodResponse == $index">
                             <a class="card-link">Anecdote</a>
                             <p class="anecdote"></p>

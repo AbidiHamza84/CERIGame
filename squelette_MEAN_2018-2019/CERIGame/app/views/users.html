@@ -1,1 +1,34 @@
-Liste d'amis
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Avatar</th>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Statut</th>
+        <th>Defi</th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+        <tr style="height: 100px;" ng-repeat="user in users">
+            <td><img class="profile-img" src="{{user.avatar}}"/> </td>
+            <td>{{ user.nom }}</td>
+            <td>{{ user.prenom }}</td>
+            <td>
+                <div class="connected" ng-show="{{ user.statut == 1}}" ><img src="./../../images/connected.png" /></div>
+                <div class="disconnected" ng-show="{{ user.statut == 0}}"><img src="./../../images/disconnected.png" /></div>
+            </td>
+            <td>
+                <a href="/profile/{{user.id}}">
+                    <button class="btn btn-success">Visiter</button>
+                </a><br><br>
+                <a href="/profile/{{user.id}}">
+                    <button class="btn btn-danger">Défier</button>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div ng-bind="content"></div>

@@ -1,82 +1,99 @@
-CERIGameApp.service('Request', ['$http', 'Session', '$rootScope', function ($http, Session, $rootScope) {
+CERIGameApp.service('Request', ['$http', 'Session', '$q', function ($http, Session, $q) {
+
+    let result = undefined;
 
 
-    this.get = function (request, callback = undefined) {
-
-        $rootScope.showPane = function() {
-            $rootScope.isPaneShown = true;
-        };
-
+    this.get = function (request) {
+        let deferred = $q.defer();
         // on récupère la session
-        Session.get(function (session) {
-           if(session !== undefined){
+        Session.get().then(function (session) {
+            // si la session est valide, on envoie la requete
+            $http.get(request).then(function(response){
 
-               // si la session est valide, on envoie la requete
-               $http.get(request).then(function(response){
+                result = response.data;
+                deferred.resolve(result);
 
-                    // si il y a callback, on l'execute en lui passant le résultat de la requete
-                    if(callback !== undefined){
-                        callback(response);
-                    }
+            }, function(error) {
 
-                   $rootScope.hidePane = function() {
-                       $rootScope.isPaneShown = false;
-                   };
-               });
-           }
+                result = error;
+                deferred.reject(error);
+
+            });
+        }, function(error) {
+            result = error;
+            deferred.reject(error);
         });
 
+        result = deferred.promise;
 
+        return $q.when(result);
     };
 
-    this.post = function(request = "", params = {}, callback = undefined){
+    this.post = function(request = "", params = {}){
+        let deferred = $q.defer();
         // on récupère la session
-        Session.get(function (session) {
-            if(session !== undefined){
+        Session.get().then(function (session) {
 
-                // si la session est valide, on envoie la requete
-                $http.post(request,params).then(function(response){
-
-                    // si il y a callback, on l'execute en lui passant le résultat de la requete
-                    if(callback !== undefined){
-                        callback(response);
-                    }
-                });
-            }
+            // si la session est valide, on envoie la requete
+            $http.post(request,params).then(function(response){
+                result = response.data;
+                deferred.resolve(result);
+            }, function(error) {
+                result = error;
+                deferred.reject(error);
+            });
+        }, function(error) {
+            result = error;
+            deferred.reject(error);
         });
+
+        result = deferred.promise;
+
+        return $q.when(result);
     };
 
-    this.put = function (request = "", params = {}, callback = undefined) {
+    this.put = function (request = "", params = {}) {
+        let deferred = $q.defer();
         // on récupère la session
-        Session.get(function (session) {
-            if(session !== undefined){
-
-                // si la session est valide, on envoie la requete
-                $http.put(request,params).then(function(response){
-
-                    // si il y a callback, on l'execute en lui passant le résultat de la requete
-                    if(callback !== undefined){
-                        callback(response);
-                    }
-                });
-            }
+        Session.get().then(function (session) {
+            // si la session est valide, on envoie la requete
+            $http.put(request,params).then(function(response){
+                result = response.data;
+                deferred.resolve(result);
+            }, function(error) {
+                result = error;
+                deferred.reject(error);
+            });
+        }, function(error) {
+            result = error;
+            deferred.reject(error);
         });
+
+        result = deferred.promise;
+
+        return $q.when(result);
     };
 
-    this.delete = function (request = "", params = {}, callback = undefined) {
+    this.delete = function (request = "", params = {}) {
+        let deferred = $q.defer();
         // on récupère la session
-        Session.get(function (session) {
-            if(session !== undefined){
+        Session.get().then(function (session) {
 
-                // si la session est valide, on envoie la requete
-                $http.delete(request,params).then(function(response){
-
-                    // si il y a callback, on l'execute en lui passant le résultat de la requete
-                    if(callback !== undefined){
-                        callback(response);
-                    }
-                });
-            }
+            // si la session est valide, on envoie la requete
+            $http.delete(request,params).then(function(response){
+                result = response.data;
+                deferred.resolve(result);
+            }, function(error) {
+                result = error;
+                deferred.reject(error);
+            });
+        }, function(error) {
+            result = error;
+            deferred.reject(error);
         });
+
+        result = deferred.promise;
+
+        return $q.when(result);
     };
 }]);

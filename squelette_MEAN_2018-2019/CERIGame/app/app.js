@@ -4,7 +4,7 @@ CERIGameApp
     .run(['$rootScope', '$route', '$window', 'Session', function ($rootScope, $route, $window, Session) {
         $rootScope.$on("$routeChangeSuccess", function (currentRoute, previousRoute) {
 
-            Session.get(function(session){
+            Session.get().then(function(session){
                 if(session !== undefined){
                     //Change page title, based on Route information
                     $rootScope.title = $route.current.title;
@@ -43,6 +43,11 @@ CERIGameApp
                 title: 'Tableau de bord',
             })
             .when('/profile', {
+                templateUrl: '/app/views/profile.html',
+                controller: 'ProfileController',
+                title: 'Profile',
+            })
+            .when('/profile/:id', {
                 templateUrl: '/app/views/profile.html',
                 controller: 'ProfileController',
                 title: 'Profile',

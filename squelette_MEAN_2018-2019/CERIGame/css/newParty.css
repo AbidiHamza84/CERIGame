@@ -31,6 +31,14 @@
     transition: .3s linear all;
 }
 
+.isGoodResponse{
+    color: green;
+}
+
+.isWrongResponse{
+    color: red;
+}
+
 .card-proposition.false{
     border-color: #e57373;
     box-shadow: 4px 4px 50px #f44336;
